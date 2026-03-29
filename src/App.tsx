@@ -39,7 +39,7 @@ export default function App() {
     setLoading(true);
     setError(null);
     try {
-      const response = await fetch(`/api/binance/klines?symbol=${symbol}&interval=${interval}&limit=200`);
+      const response = await fetch(`https://api.binance.com/api/v3/klines?symbol=${symbol}&interval=${interval}&limit=200`);
       
       if (!response.ok) {
         const errorData = await response.json().catch(() => ({}));
