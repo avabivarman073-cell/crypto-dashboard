@@ -17,6 +17,7 @@ export default defineConfig(({mode}) => {
     },
     server: {
       // HMR is disabled in AI Studio via DISABLE_HMR env var.
+<<<<<<< HEAD
       // Do not modify—file watching is disabled to prevent flickering during agent edits.
       hmr: process.env.DISABLE_HMR !== 'true',
       
@@ -28,6 +29,10 @@ export default defineConfig(({mode}) => {
           rewrite: (path) => path.replace(/^\/api\/binance/, '/api/v3'),
         }
       }
+=======
+      // Do not modifyâfile watching is disabled to prevent flickering during agent edits.
+      hmr: process.env.DISABLE_HMR !== 'true',
+>>>>>>> 3b761e54730de8dd4994ae15110ee319591e2a97
     },
   };
 });

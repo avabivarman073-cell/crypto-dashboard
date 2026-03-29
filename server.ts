@@ -1,7 +1,11 @@
 import express from "express";
 import { createServer as createViteServer } from "vite";
 import path from "path";
+<<<<<<< HEAD
 import { createProxyMiddleware } from 'http-proxy-middleware';
+=======
+import axios from "axios";
+>>>>>>> 3b761e54730de8dd4994ae15110ee319591e2a97
 
 async function startServer() {
   const app = express();
@@ -10,6 +14,7 @@ async function startServer() {
   app.use(express.json());
 
   // Proxy Binance API to avoid CORS
+<<<<<<< HEAD
   app.use('/api/binance', createProxyMiddleware({
     target: 'https://api.binance.com/api/v3',
     changeOrigin: true,
@@ -38,6 +43,31 @@ async function startServer() {
   // API routes go here
   app.get("/api/health", (req, res) => {
     res.json({ status: "ok" });
+=======
+  app.get("/api/binance/klines", async (req, res) => {
+    try {
+      const { symbol, interval, limit } = req.query;
+      const response = await axios.get("https://api.binance.com/api/v3/klines", {
+        params: { symbol, interval, limit },
+      });
+      res.json(response.data);
+    } catch (error) {
+      console.error("Binance API error:", error);
+      res.status(500).json({ error: "Failed to fetch data from Binance" });
+    }
+  });
+
+  app.get("/api/binance/ticker", async (req, res) => {
+    try {
+      const { symbol } = req.query;
+      const response = await axios.get("https://api.binance.com/api/v3/ticker/price", {
+        params: { symbol },
+      });
+      res.json(response.data);
+    } catch (error) {
+      res.status(500).json({ error: "Failed to fetch price" });
+    }
+>>>>>>> 3b761e54730de8dd4994ae15110ee319591e2a97
   });
 
   // Vite middleware for development
